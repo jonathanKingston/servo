@@ -52,7 +52,8 @@ impl Location {
             Some(pipeline_id),
             referrer,
             referrer_policy,
-            None, // Top navigation doesn't inherit secure context
+            Some(self.window.upcast::<GlobalScope>().is_secure_context()),
+            true,
         );
         // TODO: rethrow exceptions, set exceptions enabled flag.
         self.window

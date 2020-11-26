@@ -1544,6 +1544,7 @@ where
                     Referrer::NoReferrer,
                     None,
                     None,
+                    true
                 );
                 let ctx_id = BrowsingContextId::from(top_level_browsing_context_id);
                 let pipeline_id = match self.browsing_contexts.get(&ctx_id) {
@@ -2915,6 +2916,7 @@ where
             Referrer::NoReferrer,
             None,
             None,
+            false,
         );
         let sandbox = IFrameSandboxState::IFrameSandboxed;
         let is_private = false;
@@ -3032,6 +3034,7 @@ where
             Referrer::NoReferrer,
             None,
             None,
+            true
         );
         let sandbox = IFrameSandboxState::IFrameUnsandboxed;
         let is_private = false;

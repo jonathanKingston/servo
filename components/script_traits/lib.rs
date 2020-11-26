@@ -205,7 +205,13 @@ impl LoadData {
         referrer: Referrer,
         referrer_policy: Option<ReferrerPolicy>,
         inherited_secure_context: Option<bool>,
+        is_remote: bool
     ) -> LoadData {
+        let inherited_secure_context = if is_remote && (url.scheme() != "data" && url.scheme() != "blob" && url.scheme() != "javascript" && url.scheme() != "about") {
+            None
+        } else {
+            inherited_secure_context
+        };
         LoadData {
             load_origin,
             url: url,

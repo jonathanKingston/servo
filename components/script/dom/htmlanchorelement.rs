@@ -711,6 +711,7 @@ pub fn follow_hyperlink(subject: &Element, hyperlink_suffix: Option<String>) {
             referrer,
             referrer_policy,
             Some(secure),
+            false,
         );
         let target = Trusted::new(target_window);
         let task = task!(navigate_follow_hyperlink: move || {

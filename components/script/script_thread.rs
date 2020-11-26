@@ -826,7 +826,13 @@ impl ScriptThreadFactory for ScriptThread {
                     layout_is_busy,
                     secure,
                 );
-                script_thread.pre_page_load(new_load, load_data);
+                if load_data.url.as_str() == "about:blank" {
+                    script_thread.start_page_load_about_blank(new_load, load_data.js_eval_result);
+                } else if load_data.url.as_str() == "about:srcdoc" {
+                    script_thread.page_load_about_srcdoc(new_load, load_data);
+                } else {
+                    script_thread.pre_page_load(new_load, load_data);
+                }
 
                 let reporter_name = format!("script-reporter-{}", id);
                 mem_profiler_chan.run_with_memory_reporting(
